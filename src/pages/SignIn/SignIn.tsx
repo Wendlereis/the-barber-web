@@ -15,6 +15,7 @@ import Button from "../../components/Button";
 import { useAuth } from "../../hooks/AuthContext";
 
 import { Container, Content, Background } from "./styles";
+import { useToast } from "../../hooks/ToastContext";
 
 interface SignInForm {
   email: string;
@@ -25,6 +26,7 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: SignInForm) => {
@@ -42,10 +44,14 @@ const SignIn: React.FC = () => {
 
         signIn({ email: data.email, password: data.password });
       } catch (error) {
-        formRef.current?.setErrors(getValidationErrors(error));
+        if (error instanceof Yup.ValidationError) {
+          formRef.current?.setErrors(getValidationErrors(error));
+        }
+
+        addToast({ type: 'error', title: 'Ocorreu um erro',  description: 'Não foi possível efetuar o login.' })
       }
     },
-    [signIn]
+    [signIn, addToast]
   );
 
   return (
