@@ -16,6 +16,7 @@ import { useAuth } from "../../hooks/AuthContext";
 
 import { Container, Content, Background } from "./styles";
 import { useToast } from "../../hooks/ToastContext";
+import { Link } from "react-router-dom";
 
 interface SignInForm {
   email: string;
@@ -76,10 +77,10 @@ const SignIn: React.FC = () => {
           <a href="forgot">Esqueci minha senha</a>
         </Form>
 
-        <a href="forgot">
+        <Link to="/signup">
           <FiLogIn />
           Criar conta
-        </a>
+        </Link>
       </Content>
       <Background />
     </Container>

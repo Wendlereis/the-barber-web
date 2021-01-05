@@ -12,6 +12,7 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 
 import { Container, Content, Background } from "./styles";
+import { Link } from "react-router-dom";
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -57,10 +58,10 @@ const SignUp: React.FC = () => {
           <Button type="submit">Cadastrar</Button>
         </Form>
 
-        <a href="forgot">
+        <Link to="signin">
           <FiArrowLeft />
           Voltar ao Logon
-        </a>
+        </Link>
       </Content>
     </Container>
   );
